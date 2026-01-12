@@ -14,6 +14,7 @@ export struct WorkoutDetailPage {
   @Consume('pageStack') pageStack: NavPathStack;
   @State workout: Workout | null = null;
   @State currentExerciseIndex: number = 0;
+  @State currentExercise: Exercise | null = null;
   @State currentWeight: number = 20;
   saveOptions: ArcButtonOptions = new ArcButtonOptions({});
 
@@ -43,11 +44,15 @@ export struct WorkoutDetailPage {
       if (this.workout) {
         Column() {
           Row() {
-            ForEach(this.workout.exercises, (exercise: Exercise, index: number) => {
-              Circle({ width: 4, height: 4 })
-                .fill(this.currentExerciseIndex === index ? '#007AFF' : '#333333')
-                .margin({ left: 2, right: 2 })
-            })
+            ForEach(
+              this.workout.exercises,
+              (exercise: Exercise) => {
+                Circle({ width: 4, height: 4 })
+                  .fill(this.currentExercise === exercise ? '#007AFF' : '#333333')
+                  .margin({ left: 2, right: 2 })
+              },
+              (exercise: Exercise) => exercise.name
+            )
           }
           .justifyContent(FlexAlign.Center)
           .margin({ top: 2, bottom: 4 })
@@ -117,11 +122,12 @@ export struct WorkoutDetailPage {
                 .height('100%')
                 .justifyContent(FlexAlign.Center)
                 .alignItems(HorizontalAlign.Center)
-              })
+              }, (exercise: Exercise) => exercise.name)
             }
             .indicator(false)
             .onChange((index: number) => {
               this.currentExerciseIndex = index;
+              this.currentExercise = this.workout?.exercises[index] ?? null;
               const exercise = this.getCurrentExercise();
               if (exercise && exercise.sets.length > 0) {
                 LocalStore.getLastWeight(exercise.name, exercise.sets[0].weightKg).then(v => {

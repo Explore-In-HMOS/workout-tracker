@@ -10,7 +10,7 @@ import {
 @Component
 export struct StarterPage {
   @Consume('pageStack') pageStack: NavPathStack;
-  @State message: string = 'Workout\nTracker';
+  message: string = 'Workout\nTracker';
   bottomOptions: ArcButtonOptions = new ArcButtonOptions({});
 
   aboutToAppear() {

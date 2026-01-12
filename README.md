@@ -7,9 +7,9 @@ Workout Tracker makes logging strength sessions fast and frictionless directly o
 # Preview
 
 <div>
-    <img src="./screenshots/ss1.png" width="25%"/>
-    <img src="./screenshots/ss2.png" width="25%"/>
-    <img src="./screenshots/ss3.png" width="25%"/>
+<img src="./screenshots/ss1.png" width="24%"/>
+<img src="./screenshots/ss2.png" width="24%"/>
+<img src="./screenshots/ss3.png" width="24%"/>
 </div>
   
 # Use Cases
